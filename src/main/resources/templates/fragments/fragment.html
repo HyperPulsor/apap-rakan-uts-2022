@@ -37,7 +37,30 @@
                 <a class="nav-item nav-link" th:href="@{/}">
                     Beranda<span class="sr-only">(current)</span></a>
             </li>
+            <li th:class="${activeTab == 'add-kasus'} ? 'active' : '' ">
+                <a class="nav-item nav-link" th:href="@{/covid/add}">
+                    Tambah Kasus<span class="sr-only"></span></a>
+            </li>
+            <li th:class="${activeTab == 'case'} ? 'active' : '' ">
+                <a class="nav-item nav-link" th:href="@{/covid/view-all}">
+                    Kasus Covid<span class="sr-only"></span></a>
+            </li>
+            <li th:class="${activeTab == 'laporan'} ? 'active' : '' ">
+                <a class="nav-item nav-link" th:href="@{/report/active}">
+                    Laporan Kasus Aktif<span class="sr-only"></span></a>
+            </li>
+            <li th:class="${activeTab == 'statistik'} ? 'active' : '' ">
+                <a class="nav-item nav-link" th:href="@{/report/statistics}">
+                    Statistik Kasus<span class="sr-only"></span></a>
+            </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/covid/search}" method="get">
+            <input class="form-control mr-sm-2" type="search"
+                   name="nama" placeholder="Nama" aria-label="Cari Nama">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+                Search
+            </button>
+        </form>
     </div>
 </nav>
 </body>

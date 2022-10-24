@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lihat Semua Kasus - UTS APAP 2022</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(laporan)"></nav>
+
+<div class="container">
+
+    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+    <table id="table_result" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Case Id</th>
+            <th>NIK</th>
+            <th>Nama</th>
+            <th>Status</th>
+            <th>Fakultas</th>
+            <th>Peran</th>
+            <th>Tanggal Gejala Pertama</th>
+            <th>Jumlah Hari Setelah Gejala Pertama</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+            <td>Data 7</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

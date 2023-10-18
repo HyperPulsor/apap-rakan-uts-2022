@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Kasus - UTS APAP 2022</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(course)"></nav>
+
+<div class="container">
+<!--    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>-->
+<!--    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>-->
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="mb-4">Tambah Kontak Terakhir</h2>
+                <form th:action="@{/covid/detail/{caseId}(caseId=${caseSelected.caseId})}" th:object="${lastContactModel}" method="POST">
+                    <div class="form-group row">
+                        <label for="nama" class="col-4 col-form-label">Nama : </label>
+                        <div class="col-8">
+                            <input id="nama" th:field="*{nama}" placeholder="Nama Lengkap" type="text"
+                                   class="form-control" required="required">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="keterangan" class="col-4 col-form-label">Keterangan : </label>
+                        <div class="col-8">
+                            <input id="keterangan" th:field="*{keterangan}" placeholder="Keterangan" type="text"
+                                   class="form-control" required="required">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="offset-4 col-2">
+                            <button name="save" type="submit" class="btn btn-primary">Tambah Kontak Terakhir</button>
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-primary" href="/">Back</a>
+                        </div>
+                    </div>
+                </form>
+                <h2>Daftar Kontak Terakhir</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Keterangan</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if ="${listLastContact}" th:each="contact, iterationStatus : ${listLastContact}">
+                        <td th:text="${contact.nama}"></td>
+                        <td th:text="${contact.keterangan}"></td>
+                    </tr>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

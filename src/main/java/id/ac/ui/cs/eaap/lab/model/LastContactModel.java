@@ -1,13 +1,12 @@
 package id.ac.ui.cs.eaap.lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +22,8 @@ public class LastContactModel implements Serializable {
     @Column(name = "keterangan")
     private String keterangan;
 
-    // TODO: Relasi dengan CovidCaseModel
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_covid_case", referencedColumnName = "case_id")
+    private CovidCaseModel covidCaseModel;
 
 }

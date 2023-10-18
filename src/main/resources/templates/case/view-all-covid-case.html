@@ -28,6 +28,19 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:each="covid, iterationStatus : ${caseList}" th:style="${iterationStatus.even} ? 'color:blue' : '' ">
+            <td th:text="${covid.caseId}"></td>
+            <td th:text="${covid.nik}"></td>
+            <td th:text="${covid.nama}"></td>
+            <td th:text="${covid.status}"></td>
+            <td th:text="${covid.tanggalGejalaPertama}"></td>
+            <td th:text="${covid.fakultas}"></td>
+            <td th:text="${covid.hariSetelahGejalaPertama}"></td>
+            <td>
+                <a type="button" class="btn btn-primary" th:href="@{/covid/detail/{caseId}(caseId=${covid.caseId})}">Detail</a>
+                <a type="button" class="btn btn-secondary" th:href="@{/covid/update/{caseId}(caseId=${covid.caseId})}">Update Status</a>
+            </td>
+        </tr>
         <tbody>
         </tbody>
     </table>

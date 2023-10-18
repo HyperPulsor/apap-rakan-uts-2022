@@ -5,6 +5,19 @@
     <title>Lihat Semua Kasus - UTS APAP 2022</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <script>
+        $(document).ready(function () {
+            $('#table_result').DataTable({
+                "paging": true,
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 20],
+                "columnDefs": [
+                    { "orderable": false, "targets": 5 }
+                ]
+            });
+        });
+    </script>
+
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar(laporan)"></nav>
@@ -28,14 +41,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-            <td>Data 7</td>
+        <tr th:each="case, iterationStatus : ${listActiveCase}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${case.nik}"></td>
+            <td th:text="${case.nama}"></td>
+            <td th:text="${case.status}"></td>
+            <td th:text="${case.fakultas}"></td>
+            <td th:text="${case.peran}"></td>
+            <td th:text="${case.tanggalGejalaPertama}"></td>
+            <td th:text="${case.hariSetelahGejalaPertama}"></td>
         </tr>
         </tbody>
     </table>

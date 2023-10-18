@@ -1,19 +1,22 @@
 package id.ac.ui.cs.eaap.lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "covid_case")
+@JsonIgnoreProperties(value={"listContact"})
 public class CovidCaseModel implements Serializable {
 
     @Id
@@ -32,5 +35,9 @@ public class CovidCaseModel implements Serializable {
     private String peran;
     @Column(name = "fakultas")
     private String fakultas;
+    @Column(name = "days")
+    private Long hariSetelahGejalaPertama;
+    @OneToMany(mappedBy = "covidCaseModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<LastContactModel> listContact = new ArrayList<>();
 
 }

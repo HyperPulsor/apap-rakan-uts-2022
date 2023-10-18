@@ -9,6 +9,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
             integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_result').DataTable({
+                "paging": true,
+                "pageLength": 5,
+                "lengthMenu": [5, 10, 20],
+            });
+        });
+    </script>
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar(statistik)"></nav>
@@ -24,21 +33,46 @@
             <th>Jumlah Kasus</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
+        <tbody th:if="${listCounter}">
+        <tr th:each="fakultas, iterationStatus : ${listCounter}">
+            <td th:text="${fakultas.fakultas}"></td>
+            <td th:text="${fakultas.jumlahKasus}"></td>
         </tr>
         </tbody>
     </table>
-
-
     <h2 class="mt-4 py-4">Chart</h2>
     <div class="chart-container pb-5 mb-5" style="width:80%">
         <canvas id="myChart"></canvas>
     </div>
 </div>
+<script th:inline="javascript">
+    const ctx = document.getElementById('myChart');
 
+    const namaFakultas = [[${listCounter}]].map(function(e){
+        return e.fakultas;
+    });
+    const kasusFakultas = [[${listCounter}]].map(function(e){
+        return e.jumlahKasus;
+    });
 
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: namaFakultas,
+            datasets: [{
+                label: 'Jumlah Kasus Aktif',
+                data: kasusFakultas,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>
